@@ -1,0 +1,21 @@
+{
+  "name": "devmate-backend",
+  "version": "1.0.0",
+  "description": "Online Connection & Networking App",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/App.js",
+    "dev": "nodemon src/App.js"
+  },
+  "keywords": [
+    "node.js",
+    "express.js",
+    "javascript"
+  ],
+  "author": "Patel Dharmesh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
+  }
+}
