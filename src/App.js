@@ -18,10 +18,13 @@ app.post("/signup", async (req, res) => {
 
 app.get("/feed", async (req, res) => {
   try {
+    // Fetch all users from the database
     const users = await User.find();
+    // If no users found, return a 404 status with a message
     if (users.length === 0) {
       return res.status(404).json({ message: "No users found!" });
     }
+    // Return the list of users
     res.json(users);
   } catch (error) {
     res.status(500).json({ message: "Error fetching users", error: error.message });
@@ -31,10 +34,13 @@ app.get("/feed", async (req, res) => {
 // Get user by ID
 app.get("/user/:id", async (req, res) => {
   try {
+    // Check if user exists
     const user = await User.findById(req.params.id);
+    // If user not found, return a 404 status with a message
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+    // Return the user data
     res.json(user);
   } catch (error) {
     res.status(500).json({ message: "Error fetching user", error: error.message });
@@ -66,10 +72,13 @@ app.put("/user/:id", async (req, res) => {
 // Patch user by ID (PATCH)
 app.patch("/user/:id", async (req, res) => {
   try {
+    // Check if user exists
     const patchedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    // If user not found, return a 404 status with a message
     if (!patchedUser) {
       return res.status(404).json({ message: "User not found" });
     }
+    // Return the patched user data
     res.json({ message: "User patched successfully", user: patchedUser });
   } catch (error) {
     res.status(500).json({ message: "Error patching user", error: error.message });
@@ -79,10 +88,13 @@ app.patch("/user/:id", async (req, res) => {
 // Delete user by ID
 app.delete("/user/:id", async (req, res) => {
   try {
+    // Check if user exists and delete
     const deletedUser = await User.findByIdAndDelete(req.params.id);
+    // If user not found, return a 404 status with a message
     if (!deletedUser) {
       return res.status(404).json({ message: "User not found" });
     }
+    // Return a success message
     res.json({ message: "User deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: "Error deleting user", error: error.message });
